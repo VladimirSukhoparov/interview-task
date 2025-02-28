@@ -1,0 +1,36 @@
+.container {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 4fr;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 12px;
+  cursor: pointer;
+}
+
+.chevron {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 20px;
+}
+
+.chevron::after {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 10px;
+  margin: 0px;
+  margin-left: 5px;
+  background: url('../../assets/Chevron.png') no-repeat;
+}
+
+.chevron-down::after {
+  transform: rotate(180deg);
+}
+
+.name {
+  margin-left: 15px;
+}
