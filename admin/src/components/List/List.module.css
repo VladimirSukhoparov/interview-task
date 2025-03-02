@@ -8,13 +8,14 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 12px;
-  cursor: pointer;
+ 
 }
 
 .chevron {
   display: inline-block;
   box-sizing: border-box;
   height: 20px;
+  cursor: pointer;
 }
 
 .chevron::after {

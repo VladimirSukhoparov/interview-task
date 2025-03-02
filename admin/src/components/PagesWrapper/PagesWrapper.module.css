@@ -1,0 +1,46 @@
+.title {
+  margin: 0;
+  font-weight: 700;
+  color: #222222;
+  font-size: 26px;
+  line-height: 32px;
+}
+
+.btn {
+  display: flex;
+  align-items: end;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #222222;
+  cursor: pointer;
+}
+.chevron {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.chevron::before {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 0px;
+  margin-right: 10px;
+  background: url('../../assets/Chevron.png') no-repeat;
+  transform: rotate(270deg);
+}
+
+.pages_container {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #222222;
+}

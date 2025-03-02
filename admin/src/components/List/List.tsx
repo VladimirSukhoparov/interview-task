@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Data } from '../../types';
 import { ListItem } from '../ListItem';
 import styles from './List.module.css';
 
-export const List = ({ items }: { items: Data[] | [] }) => {
+export const List = memo(({ items }: { items: Data[] | [] }) => {
   const [sortedItems, setSortedItems] = useState<Data[]>([]);
   const [isAscending, setIsAscending] = useState<string>('');
 
@@ -11,10 +11,11 @@ export const List = ({ items }: { items: Data[] | [] }) => {
     setSortedItems(items);
   }, [items]);
 
+  const statusOrder = ['DRAFT', 'STOPPED', 'PAUSED', 'ONLINE'];
+
   const sortBy = (prop: keyof Data) => {
     const sorted = [...sortedItems].sort((a, b) => {
       if (prop === 'status') {
-        const statusOrder = ['DRAFT', 'STOPPED', 'PAUSED', 'ONLINE'];
         return (
           (statusOrder.indexOf(a[prop]) - statusOrder.indexOf(b[prop])) *
           (isAscending === prop ? -1 : 1)
@@ -24,6 +25,7 @@ export const List = ({ items }: { items: Data[] | [] }) => {
       if (a[prop] > b[prop]) return isAscending ? 1 : -1;
       return 0;
     });
+
     setSortedItems(sorted);
     if (isAscending) {
       setIsAscending('');
@@ -35,35 +37,41 @@ export const List = ({ items }: { items: Data[] | [] }) => {
   return (
     <>
       <div className={styles.container}>
-        <div
-          className={`${styles.title} ${styles.name}`}
-          onClick={() => sortBy('name')}>
-          NAME
+        <div className={`${styles.title} ${styles.name}`}>
           <span
             className={`${styles.chevron} ${
               isAscending === 'name' ? styles['chevron-down'] : ''
-            }`}></span>
+            }`}
+            onClick={() => sortBy('name')}>
+            NAME
+          </span>
         </div>
-        <div className={styles.title} onClick={() => sortBy('type')}>
-          TYPE
+        <div className={styles.title}>
           <span
             className={`${styles.chevron} ${
               isAscending === 'type' ? styles['chevron-down'] : ''
-            }`}></span>
+            }`}
+            onClick={() => sortBy('type')}>
+            TYPE
+          </span>
         </div>
-        <div className={styles.title} onClick={() => sortBy('status')}>
-          STATUS
+        <div className={styles.title}>
           <span
             className={`${styles.chevron} ${
               isAscending === 'status' ? styles['chevron-down'] : ''
-            }`}></span>
+            }`}
+            onClick={() => sortBy('status')}>
+            STATUS
+          </span>
         </div>
-        <div className={styles.title} onClick={() => sortBy('site')}>
-          SITE
+        <div className={styles.title}>
           <span
             className={`${styles.chevron} ${
-              isAscending === 'siteId' ? styles['chevron-down'] : ''
-            }`}></span>
+              isAscending === 'site' ? styles['chevron-down'] : ''
+            }`}
+            onClick={() => sortBy('site')}>
+            SITE
+          </span>
         </div>
       </div>
       {sortedItems.map((item) => (
@@ -71,4 +79,4 @@ export const List = ({ items }: { items: Data[] | [] }) => {
       ))}
     </>
   );
-};
+});
